@@ -26,7 +26,6 @@ const OrderTab = ({ orderItems }) => {
             }
           </div>
         </SwiperSlide>
-
       </Swiper>
     </div>
   );

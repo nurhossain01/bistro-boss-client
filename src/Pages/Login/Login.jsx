@@ -2,12 +2,15 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
-import { GoogleAuthProvider } from 'firebase/auth';
+import SocialMediaLogin from '../SocialMediaLogin/SocialMediaLogin';
+import { Helmet } from 'react-helmet-async';
 
-const provider = new GoogleAuthProvider();
+
+
 
 const Login = () => {
-  const { userSignIn, googleSign } = useContext(AuthContext);
+
+  const { userSignIn } = useContext(AuthContext);
   const [error, setError] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
   const captchaRef = useRef();
@@ -50,20 +53,12 @@ const Login = () => {
     }
   }
 
-  // const handleGoogleSignIn = () => {
-  //   googleSingIn(provider)
-  //     .then((result) => {
-  //       const user = result.user;
-  //       console.log(user);
-  //       navigate(from, { replace: true });
-  //     }).catch((error) => {
-  //       const errorMessage = error.message;
-  //       console.log(errorMessage);
-  //     });
-  // }
 
   return (
     <div>
+      <Helmet>
+        <title>Bistro Boss | login</title>
+      </Helmet>
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center w-1/3 pl-4 lg:text-left">
@@ -94,13 +89,14 @@ const Login = () => {
               </div>
               <p className='text-rose-400 text-center'>{error}</p>
               <div className="form-control mt-6">
-                <button disabled={isDisabled} type='submit' className="btn btn-primary">Login</button>
+                <button disabled={false} type='submit' className="btn btn-primary">Login</button>
               </div>
               <div>
                 <p className="text-sm text-center sm:px-6 text-red-500">Don't have an account?
                   <Link to='/register' rel="noopener noreferrer" href="#" className="underline text-violet-600">Sign up</Link>
                 </p>
               </div>
+              <SocialMediaLogin></SocialMediaLogin>
             </form>
           </div>
         </div>
